@@ -1,0 +1,9 @@
+
+
+
+
+U61239
+
+
+
+DELETE FROM hotspotCodes WHERE plancode='U61239' AND status='unused'
