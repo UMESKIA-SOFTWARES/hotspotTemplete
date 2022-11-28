@@ -12,6 +12,7 @@
   <meta property="og:image" content="https://umeskiasoftwares.com/images/umeskia_s.png">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="https://wifi.umeskiasoftwares.com/css/main.css">
+  <link rel="stylesheet" href="css/umeskia_main.css">
   <link rel="shortcut icon" href="https://umeskiasoftwares.com/images/umeskia_s.png" />
   <title>UMESKIA SOFTWARES WIFI HOTSPOT</title>
 </head>
@@ -64,7 +65,9 @@
           <label class="lb-input-acc" for="access-code">
             <input id="pass" name="password" type="hidden" placeholder="Password" class="input-field" required />
           </label>
-          <button id="code-sum" type="submit">Connect </button><br>
+          <button id="code-sum" class="btn" type="submit">
+            <span class="button__text">Connect</span>
+          </button><br>
           <section>
             <span style="color:black; font-size:18px; font-weight:600;">If you did'nt recieve the code after payment
               click <a style="color:rgb(0, 85, 45);"
@@ -101,7 +104,14 @@
   </div>
   <script src="jquery.min.js"></script>
   <script>
-    const params = 'stationId=UMS67865587';
+    const theButton = document.querySelector(".btn");
+
+    theButton.addEventListener("click", () => {
+      theButton.classList.add("button--loading");
+    });
+  </script>
+  <script>
+    const params = 'stationId=UMS77846529';
     var stationPackage = document.getElementById('stationPackage');
     let dataUrl = "https://wifi.umeskiasoftwares.com/station";
     let request = new XMLHttpRequest();
@@ -113,7 +123,7 @@
         if (result.ResultCode == "200") {
           let statationPakages = result.statationPakages;
           for (var i = 0; i < statationPakages.length; i++) {
-            stationPackage.innerHTML += '<div class="card"><div class="price"><span>ksh</span><span>' + statationPakages[i].price + '</span></div><div class="data-amount"><span>' + statationPakages[i].numExpration + '</span><span>' + statationPakages[i].stringExpiration + ' </span></div><div class="validity-period"><span style=" font-size:18px; font-weight: bold;">Connection Time</span></div><div class="card-footer"><a style="text-decoration: none;"href="https://wifi.umeskiasoftwares.com/payment?amount=' + statationPakages[i].price + '&st=' + statationPakages[i].plancode + '">SUBSCRIBE</a></div></div>';
+            stationPackage.innerHTML += '<div class="card"><div class="price"><span>ksh</span><span>' + statationPakages[i].price + '</span></div><div class="data-amount"><span>' + statationPakages[i].numExpration + '</span><span>' + statationPakages[i].stringExpiration + ' </span></div><div class="validity-period"><span style=" font-size:18px; font-weight: bold;"> ' + statationPakages[i].plantype + ' </span></div><div class="card-footer"><a style="text-decoration: none;"href="https://wifi.umeskiasoftwares.com/payment?amount=' + statationPakages[i].price + '&st=' + statationPakages[i].plancode + '">SUBSCRIBE</a></div></div>';
           }
 
         }
